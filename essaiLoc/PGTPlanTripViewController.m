@@ -1,27 +1,25 @@
 //
-//  PGTSecondViewController.m
+//  PGTPlanTripViewController.m
 //  essaiLoc
 //
 //  Created by Pierre Gilot on 05/03/12.
 //  Copyright (c) 2012 Joyent. All rights reserved.
 //
 
-#import "PGTSecondViewController.h"
-#import "PGTUser.h"
-#import "PGTCache.h"
+#import "PGTPlanTripViewController.h"
 
-@interface PGTSecondViewController ()
+@interface PGTPlanTripViewController ()
 
 @end
 
-@implementation PGTSecondViewController
+@implementation PGTPlanTripViewController
+
+@synthesize delegate;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-  //[self setupClient];
-  //  [self getClient];
 }
 
 - (void)viewDidUnload
@@ -32,8 +30,16 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (IBAction)cancel:(id)sender
+{
+	[self.delegate planTripViewControllerDidCancel:self];
+}
+- (IBAction)done:(id)sender
+{
+	[self.delegate planTripViewControllerDidSave:self];
+}
 
 @end

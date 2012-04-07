@@ -7,7 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
+#import "PGTDepartureAnnotation.h"
+@class PGTFirstViewController;
 
-@interface PGTFirstViewController : UIViewController
+@protocol PGTFirstViewControllerDelegate <NSObject>
+
+- (void)firstViewController:(PGTFirstViewController *)controller didAddDepartureMark:(CLLocation*)mark;
+
+@end
+
+@interface PGTFirstViewController : UIViewController <MKMapViewDelegate>
+
+@property (nonatomic, retain) IBOutlet MKMapView* mapView;
+@property (nonatomic, retain) PGTDepartureAnnotation* departureAnnotation;
+
+@property (nonatomic, weak) id <PGTFirstViewControllerDelegate> delegate;
+
+-(IBAction)markLocation:(id)sender;
 
 @end

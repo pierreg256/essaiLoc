@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DDLog.h"
 
 #import "PGTAppDelegate.h"
 
