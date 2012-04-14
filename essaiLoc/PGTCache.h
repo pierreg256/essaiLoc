@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <RestKit/RestKit.h>
 
-@interface PGTCache : NSObject<RKManagedObjectCache>
+@interface PGTCache : NSObject //<RKManagedObjectCache>
 
 @end
