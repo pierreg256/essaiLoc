@@ -102,8 +102,10 @@
       user.email = self.emailTextField.text;
       RKObjectManager* manager = [RKObjectManager sharedManager];  
 
-    [manager getObject:user delegate:self block:^(RKObjectLoader* loader) {
+
+    [manager getObject:user usingBlock:^(RKObjectLoader* loader) {
       //loader.objectMapping = user.mapping;
+        loader.delegate = self;
         loader.username = emailTextField.text;
         loader.password = passwordTextField.text;
         loader.authenticationType=RKRequestAuthenticationTypeHTTPBasic;
@@ -132,7 +134,8 @@
     
     RKObjectManager* manager = [RKObjectManager sharedManager];  
 
-    [manager postObject:user delegate:self block:^(RKObjectLoader* loader) {
+    [manager postObject:user usingBlock:^(RKObjectLoader* loader) {
+        loader.delegate = self;
       //loader.serializationMapping = user.serializationMapping;
       //loader.objectMapping = user.mapping;
       loader.username = signupEmailTextField.text;

@@ -275,7 +275,7 @@
 -(void) setupClient
 {
   // Initialize RestKit
-	RKObjectManager* objectManager = [RKObjectManager objectManagerWithBaseURL:@"http://pierreg256.no.de/api"];
+	RKObjectManager* objectManager = [RKObjectManager objectManagerWithBaseURL:[NSURL URLWithString:@"http://pierreg256.no.de/api"]];
   
   // Enable automatic network activity indicator management
   objectManager.client.requestQueue.showsNetworkActivityIndicatorWhenBusy = YES;
@@ -290,7 +290,7 @@
   [RKManagedObjectMapping addDefaultDateFormatterForString:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'" inTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
 
   
-  objectManager.objectStore.managedObjectCache = [[PGTCache alloc]init];
+  //objectManager.objectStore.managedObjectCache = [[PGTCache alloc]init];
   
   RKObjectMapping* moveSerializationMapping;
   
@@ -316,7 +316,7 @@
      for you using the Active Record pattern where the class name corresponds to the entity name within Core Data.
      Twitter status objects will be mapped onto RKTStatus instances.
      */
-    moveMapping = [RKManagedObjectMapping mappingForClass:[PGTMove class]];
+    moveMapping = [RKManagedObjectMapping mappingForClass:[PGTMove class] inManagedObjectStore:objectManager.objectStore];
     moveMapping.primaryKeyAttribute = @"move_id";
     [moveMapping mapKeyPathsToAttributes:
      @"created_at", @"createdAt",
@@ -348,7 +348,7 @@
 
   RKManagedObjectMapping* userMapping;
   
-    userMapping = [RKManagedObjectMapping mappingForClass:[PGTUser class]];
+    userMapping = [RKManagedObjectMapping mappingForClass:[PGTUser class] inManagedObjectStore:objectManager.objectStore];
     userMapping.primaryKeyAttribute = @"email";
     [userMapping mapKeyPathsToAttributes:
      @"created_at", @"createdAt",
@@ -389,8 +389,9 @@
   user.email = [[NSUserDefaults standardUserDefaults] stringForKey:kUserIDKey];
   RKObjectManager* manager = [RKObjectManager sharedManager];  
   
-  [manager getObject:user delegate:self block:^(RKObjectLoader* loader) {
+  [manager getObject:user usingBlock:^(RKObjectLoader* loader) {
     //loader.objectMapping = user.mapping;
+      loader.delegate = self;
     loader.username = [[NSUserDefaults standardUserDefaults] stringForKey:kUserIDKey];// @"pierre.gilot@me.com";
     loader.password = [[NSUserDefaults standardUserDefaults] stringForKey:kUserPwdKey];;
     loader.authenticationType=RKRequestAuthenticationTypeHTTPBasic;
@@ -407,9 +408,10 @@
   
   NSString *resourcePath = [NSString stringWithFormat:@"/users/%@/moves", currentUser.email];
   
-  [[RKObjectManager sharedManager] loadObjectsAtResourcePath:resourcePath delegate:self block:^(RKObjectLoader* loader) {
-    loader.username = [[NSUserDefaults standardUserDefaults] stringForKey:kUserIDKey];
-    loader.password = [[NSUserDefaults standardUserDefaults] stringForKey:kUserPwdKey];
+  [[RKObjectManager sharedManager] loadObjectsAtResourcePath:resourcePath usingBlock:^(RKObjectLoader* loader) {
+      loader.delegate = self;
+      loader.username = currentUser.email;
+    loader.password = currentUser.password;
     loader.authenticationType=RKRequestAuthenticationTypeHTTPBasic;
     loader.cachePolicy =  RKRequestCachePolicyLoadIfOffline | RKRequestCachePolicyTimeout;
     loader.cache.storagePolicy = RKRequestCacheStoragePolicyPermanently;
