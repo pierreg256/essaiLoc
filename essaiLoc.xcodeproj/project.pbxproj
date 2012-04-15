@@ -63,6 +63,9 @@
 		C8C408141513DED3006733E3 /* PGTCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C8C408131513DED3006733E3 /* PGTCache.m */; };
 		C8F87D871523622600FF6525 /* PGTError.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F87D861523622600FF6525 /* PGTError.m */; };
 		C8F87D8A15237A7A00FF6525 /* PGTUpcomingTripsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F87D8915237A7A00FF6525 /* PGTUpcomingTripsViewController.m */; };
+		D7A2C36A153B0A7D00409D07 /* essaiLocIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = D7A2C369153B0A7D00409D07 /* essaiLocIcon.png */; };
+		D7A2C36C153B0A8E00409D07 /* essaiLocIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7A2C36B153B0A8E00409D07 /* essaiLocIcon@2x.png */; };
+		D7A2C36E153B0CF200409D07 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7A2C36D153B0CF200409D07 /* Default@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,6 +197,9 @@
 		C8F87D861523622600FF6525 /* PGTError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGTError.m; sourceTree = "<group>"; };
 		C8F87D8815237A7A00FF6525 /* PGTUpcomingTripsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGTUpcomingTripsViewController.h; sourceTree = "<group>"; };
 		C8F87D8915237A7A00FF6525 /* PGTUpcomingTripsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGTUpcomingTripsViewController.m; sourceTree = "<group>"; };
+		D7A2C369153B0A7D00409D07 /* essaiLocIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = essaiLocIcon.png; sourceTree = "<group>"; };
+		D7A2C36B153B0A8E00409D07 /* essaiLocIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "essaiLocIcon@2x.png"; sourceTree = "<group>"; };
+		D7A2C36D153B0CF200409D07 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +257,9 @@
 		C866E1101504CB1D00E37D9D = {
 			isa = PBXGroup;
 			children = (
+				D7A2C36D153B0CF200409D07 /* Default@2x.png */,
+				D7A2C36B153B0A8E00409D07 /* essaiLocIcon@2x.png */,
+				D7A2C369153B0A7D00409D07 /* essaiLocIcon.png */,
 				C8F87D8815237A7A00FF6525 /* PGTUpcomingTripsViewController.h */,
 				C8F87D8915237A7A00FF6525 /* PGTUpcomingTripsViewController.m */,
 				C89F9FDB1518E82F00A7139E /* PGTSettingsViewController.h */,
@@ -510,6 +519,9 @@
 				C84264E2150BE8C100804245 /* 07-map-marker.png in Resources */,
 				C89F9FD51518933B00A7139E /* essaiLocTitle.png in Resources */,
 				C89F9FD81518940700A7139E /* essaiLocTitle@2x.png in Resources */,
+				D7A2C36A153B0A7D00409D07 /* essaiLocIcon.png in Resources */,
+				D7A2C36C153B0A8E00409D07 /* essaiLocIcon@2x.png in Resources */,
+				D7A2C36E153B0CF200409D07 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
