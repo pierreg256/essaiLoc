@@ -291,8 +291,21 @@
 
   
   //objectManager.objectStore.managedObjectCache = [[PGTCache alloc]init];
+    objectManager.objectStore.cacheStrategy = [[PGTCache alloc] init];
+    
+    RKObjectMapping* errorMapping = [RKObjectMapping mappingForClass:[PGTError class]];
+    [errorMapping mapAttributes:@"code", @"message", nil];
+    [[RKObjectManager sharedManager].mappingProvider setMapping:errorMapping forKeyPath:@"errors"];
+    
+    RKManagedObjectMapping* horseMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PGTHorse" inManagedObjectStore:objectManager.objectStore];
+    horseMapping.primaryKeyAttribute = @"horseID";
+    [horseMapping mapKeyPath:@"id" toAttribute:@"horseID"];
+    [horseMapping mapKeyPath:@"created_at" toAttribute:@"createdAt"];
+    [horseMapping mapAttributes:@"name", nil];  
+    [[RKObjectManager sharedManager].mappingProvider setMapping:horseMapping forKeyPath:@"horses"];
   
-  RKObjectMapping* moveSerializationMapping;
+    
+    RKObjectMapping* moveSerializationMapping;
   
     moveSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     [moveSerializationMapping mapKeyPathsToAttributes:
@@ -436,6 +449,8 @@
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error
 {
   DDLog(@"Query Error : %d", objectLoader.response.statusCode);
+    DDLog(@"Error response: %@", objectLoader.response.bodyAsString);
+    
   id rawError = [error.userInfo valueForKey:RKObjectMapperErrorObjectsKey];
   DDLog(@"err type:%@", rawError);
   if ([rawError isKindOfClass:[PGTError class]])

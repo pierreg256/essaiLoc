@@ -13,6 +13,16 @@
 
 @implementation PGTCache
 
+- (NSManagedObject *)findInstanceOfEntity:(NSEntityDescription *)entity
+                  withPrimaryKeyAttribute:(NSString *)primaryKeyAttribute
+                                    value:(id)primaryKeyValue
+                   inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+{
+    NSLog(@"entity: %@, key: %@, value:%@, context:%@", entity, primaryKeyAttribute, primaryKeyValue, managedObjectContext);
+    return nil;
+}
+
+
 - (NSArray*)fetchRequestsForResourcePath:(NSString*)resourcePath
 {
   DDLog(@"resource: %@", resourcePath);
